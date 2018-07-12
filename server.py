@@ -31,6 +31,15 @@ class Partida(Resource):
         query = conn.execute("select id, id_nivel, progreso_realizado, monedas_recolectadas, letras_recolectadas from partida;")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
+#post partida
+    def post(self):
+        conn = db_connect.connect()
+        print(request.json)
+        progreso_realizado = request.json['progreso_realizado']
+        monedas_recolectadas = request.json['monedas_recolectadas']
+        letras_recolectadas = request.json['letras_recolectadas']
+        query = conn.execute("insert into usuario values(null,'{0}','{1}')".format(progreso_realizado,monedas_recolectadas,letras_recolectadas))
+        return {'status':'success'}
 
 class Seleccionar(Resource):
     def get(self):
@@ -45,6 +54,15 @@ class Mapa(Resource):
         query = conn.execute("select id, id_nivel, progreso_realizado, monedas_recolectadas, letras_recolectadas from mapa ;")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
+#post mapa
+    def post(self):
+        conn = db_connect.connect()
+        print(request.json)
+        progreso_realizado = request.json['progreso_realizado']
+        monedas_recolectadas = request.json['monedas_recolectadas']
+        letras_recolectadas = request.json['letras_recolectadas']
+        query = conn.execute("insert into usuario values(null,'{0}','{1}')".format(progreso_realizado,monedas_recolectadas,letras_recolectadas))
+        return {'status':'success'}
 
 class Nivel(Resource):
     def get(self):
@@ -66,6 +84,13 @@ class Tienda(Resource):
         query = conn.execute("select id, id_usuario,id_rep_skins,monedas_disponibles from tienda;")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
+
+    def post(self):
+        conn = db_connect.connect()
+        print(request.json)
+        monedas_disponibles = request.json['monedas_disponibles']
+        query = conn.execute("insert into usuario values(null,'{0}')".format(progreso_realizado,monedas_recolectadas,letras_recolectadas))
+        return {'status':'success'}
 
 class Repositorio_Skins(Resource):
     def get(self):
